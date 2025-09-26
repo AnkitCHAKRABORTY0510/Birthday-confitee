@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Countdown to Birthday</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #ffdde1, #ee9ca7);
+      font-family: "Comic Sans MS", cursive, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .not-birthday {
+      background: rgba(255,255,255,0.85);
+      border-radius: 20px;
+      padding: 40px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      max-width: 600px;
+    }
+
+    #roast-message {
+      font-size: 1.8rem;
+      font-weight: bold;
+      margin-bottom: 20px;
+      opacity: 0;
+      transform: scale(0.8) rotate(-3deg);
+      transition: all 0.6s ease-in-out;
+      text-shadow: 2px 2px 8px rgba(0,0,0,0.2);
+    }
+
+    #roast-message.show {
+      opacity: 1;
+      transform: scale(1) rotate(0deg);
+    }
+
+    #countdown {
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin-top: 20px;
+      color: #333;
+    }
+
+    .not-birthday p {
+      font-size: 1.2rem;
+      color: #444;
+    }
+  </style>
+</head>
+<body>
+  <div class="not-birthday">
+    <div id="roast-message"></div>
+    <p>Your birthday is on <b>05/10</b> 🎉. Come back then for the real surprise!</p>
+    <div id="countdown"></div>
+  </div>
+
+  <script>
+    const birthdayDay = 5;
+    const birthdayMonth = 10;
+
+    const roastEl = document.getElementById("roast-message");
+    const countdownEl = document.getElementById("countdown");
+
+    // Friendly random messages
+    const messages = [
+      "Not your day yet, hang in there!",
+      "Nope… still not your birthday.",
+      "🙄 Seriously? You're opening this again?",
+      "Today = ordinary. Tomorrow = maybe?",
+      "Not today, superstar. Wait a little longer!",
+      "🥳 Fake alert! No balloons for you today.",
+      "Almost there… wait a bit more!",
+      "Cake denied! Wait a little longer 🎂",
+      "🤔 Do you really think every day is your birthday?",
+      "Surprise alert: no surprise today 😂",
+      "Hold on! Birthday coming soon.",
+      "🤷‍♂️ Not today… unless you time-traveled wrong.",
+      "Keep calm… birthday pending 🎂",
+      "You're cute, but not today 😉",
+      "Cake isn't ready… come back later 🍰",
+      "😂 Imagine opening this 364 times just for fun.",
+      "Hold your excitement, birthday girl 😉",
+      "Patience, confetti is expensive 😂",
+      "Chill, balloons 🎈 reserved for the right day 🎂",
+      "Stop refreshing… the surprise isn’t ready yet!",
+      "Not today, but you’re amazing anyway 😎",
+      "Your confetti delivery is scheduled for your birthday!",
+      "Patience is a virtue… birthday edition 🥳",
+      "Relax, your cake is baking let me cook 🎂",
+      "Not today… go enjoy your day anyway!",
+      "Almost… but still ordinary 😉",
+      "Keep calm and wait for the birthday 🎉",
+    ];
+
+    // Pick a random message
+    const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+
+    // Show message with animation
+    function showMessage(message) {
+      roastEl.classList.remove("show");
+      setTimeout(() => {
+        roastEl.innerText = message;
+        roastEl.style.color = `hsl(${Math.random() * 360}, 70%, 50%)`;
+        roastEl.classList.add("show");
+      }, 300);
+    }
+
+    showMessage(randomMessage);
+
+    // Countdown timer
+    function updateCountdown() {
+      const now = new Date();
+
+      let year = now.getFullYear();
+      const birthdayThisYear = new Date(year, birthdayMonth - 1, birthdayDay, 0, 0, 0);
+      if (now > birthdayThisYear) year += 1;
+      const nextBirthday = new Date(year, birthdayMonth - 1, birthdayDay, 0, 0, 0);
+
+      const diff = nextBirthday - now;
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((diff / (1000 * 60)) % 60);
+      const seconds = Math.floor((diff / 1000) % 60);
+
+      countdownEl.innerText = `Countdown: ${days}d ${hours}h ${minutes}m ${seconds}s`;
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+  </script>
+</body>
+</html>
