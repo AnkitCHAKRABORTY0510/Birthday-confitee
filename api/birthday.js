@@ -3,8 +3,8 @@ import path from "path";
 
 export default async function handler(req, res) {
   // Replace with your birthday
-  const BIRTHDAY_MONTH = 9; // September (0 = January)
-  const BIRTHDAY_DAY = 26;
+  const BIRTHDAY_MONTH = 10; // September (0 = January)
+  const BIRTHDAY_DAY = 05;
 
   const today = new Date();
   const day = today.getDate();
